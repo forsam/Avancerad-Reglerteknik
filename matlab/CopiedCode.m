@@ -19,7 +19,7 @@ I_w = 0.00000746;
 
 
 % Helping constant
-C_1 = b_f + K_t*K_e/R_m;
+C_1 = -(b_f + K_t*K_e/R_m);
 % Fitting constants for matrices
 % Gamma
 G11 = I_w/l_w + m_w*l_w + m_b*l_w;
@@ -36,5 +36,5 @@ a22 = -C_1/l_w;
 a23 = m_b*l_b*g;
 a24 = C_1;
 % Beta
-b1 = -K_t/R_m;
+b1 = K_t/R_m;
 b2 = -b1;
