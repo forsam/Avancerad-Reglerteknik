@@ -24,9 +24,9 @@ G = tf(ss(A,B,C,0));
 [Gnum,Gden] = ss2tf(A,B,C,0);
 
 P1 = -1;
-P2 = -12;
-P3 = -14;
-P4 = 1;
+P2 = -1.3;
+P3 = -1.6;
+%P4 = 1;
 
 % Gnum(3) = A
 % Gnum(4) = B
@@ -41,9 +41,15 @@ P4 = 1;
 Kd = (-(P1 + P2 + P3) - Gden(2))/Gnum(3);
 Kp = (P1*P2 + P1*P3 + P2*P3 - Gden(3))/(Gnum(3));
 Ki = (-P1*P2*P3 - Gden(4))/(Gnum(3));
-
 D = tf([Kd Kp Ki],[1 0]);
+
 %G= tf([Gnum(3) 0],[1 Gden(2) Gden(3) Gden(4)])
 T = D*G/(D*G + 1);
 T = minreal(T);
-step(T)
+%förfilter
+[Tnum,Tden]=tfdata(T);
+F = tf([Tden{1}(4)],Gnum(3)*[Kd,Kp,Ki]);
+Tfilt = minreal(F*T);
+
+%opt = stepDataOptions('stepamplitude',pi/180);
+impulse(Tfilt)
