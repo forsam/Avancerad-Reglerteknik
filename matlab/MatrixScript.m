@@ -15,6 +15,8 @@ Beta = [0;b1;0;b2];
 A = Gamma\Alpha;
 B = Gamma\Beta;
 C = [0,0,1,0];
+Csim = eye(4);
+Dsim = zeros(4,2);
 
 % Solve this, make the transfer function which is
 % Y(s) = G(s)*U(s)
@@ -57,3 +59,5 @@ F = tf([Tden{1}(4)],Gnum(3)*[Kd,Kp,Ki]);
 T = minreal(F*T);
 [pny zny] = pzmap(T);
 impulse(T);
+
+
