@@ -29,9 +29,9 @@ G = tf([Gnum(3) 0],[1 Gden(2) Gden(3) Gden(4)]);
 
 [p z] = pzmap(G);
 
-P1 = p(1)+1;
-P2 = p(3)+1;
-P3 = p(3)+2;
+P1 = p(1);
+P2 = p(3);
+P3 = -1;
 %P4 = 1;
 
 % Gnum(3) = A
@@ -46,15 +46,14 @@ Ki = (-P1*P2*P3 - Gden(4))/(Gnum(3));
 D = tf([Kd Kp Ki],[1 0]);
 
 T = feedback(D*G,1);
-T = minreal(T);
 [Tnum,Tden]=tfdata(T);
 norm = Tden{1}(4)/(Tnum{1}(4));
-T = T*norm;
+%T = T*norm;
 [pny zny] = pzmap(T);
-step(T);
+impulse(T);
 %förfilter
 
-% F = tf([Tden{1}(4)],Gnum(3)*[Kd,Kp,Ki]);
-% T = minreal(F*T);
-
-%opt = stepDataOptions('stepamplitude',pi/180);
+F = tf([Tden{1}(4)],Gnum(3)*[Kd,Kp,Ki]);
+T = minreal(F*T);
+[pny zny] = pzmap(T);
+impulse(T);
