@@ -80,8 +80,8 @@ tn = [0 0 0 1]/Controllability;
 Tinv = [tn*A^3;tn*A^2;tn*A;tn*eye(4)];
 
 % bestämmer egenskaper för dominant andragrads system!!
-overshoot = 0.1; % andel overshoot!!
-ksi = sqrt((log(overshoot)^2)/(pi^2 + log(overshoot)^2)); % underdämpat
+overshoot = 0.5;
+ksi = sqrt((log(overshoot)^2)/(pi^2 + log(oversh))); % underdämpat
 settlingTime = 2;
 omega_n = 3.9/(ksi*settlingTime);
 

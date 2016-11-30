@@ -22,19 +22,29 @@ I_w = 0.00000746;
 C_1 = -(b_f + K_t*K_e/R_m);
 % Fitting constants for matrices
 % Gamma
-G11 = I_w/l_w + m_w*l_w + m_b*l_w;
-G12 = m_b*l_b*l_w;
-G21 = m_b*l_b;
-G22 = I_b + m_b*l_b^2;
+G11 = 1;
+G22 = I_w/l_w + m_w*l_w + m_b*l_w;
+G24 = m_b*l_b*l_w;
+G33 = 1;
+G42 = m_b*l_b;
+G44 = I_b + m_b*l_b^2;
 % Alpha
 a11 = 0;
-a12 = C_1/l_w;
+a12 = 1;
 a13 = 0;
-a14 = -C_1;
+a14 = 0;
 a21 = 0;
-a22 = -C_1/l_w;
-a23 = m_b*l_b*g;
-a24 = C_1;
+a22 = C_1/l_w;
+a23 = 0;
+a24 = -C_1;
+a31 = 0;
+a32 = 0;
+a33 = 0;
+a34 = 1;
+a41 = 0;
+a42 = -C_1/l_w;
+a43 = m_b*l_b*g;
+a44 = C_1;
 % Beta
-b1 = K_t/R_m;
-b2 = -b1;
+b2 = K_t/R_m;
+b4 = -b2;
