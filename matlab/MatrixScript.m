@@ -94,4 +94,26 @@ pc = [s1,s2,pc(2),pc(3)];
 
 K = acker(A,B,pc)
 
+%L = (acker(A',C',somePoles))';
+C1 = [1 0 1 0];
+R = 1;
+rho = 100;
+Q = rho*C1'*C1;
+lqrK = lqr(A,B,Q,R)
 
+
+% mimo system use place instead of acker!
+
+syms s
+N = det([eye(4)*s-Ac, -Bc ; C1,0]);
+D = det([eye(4)*s-Ac]);
+minusN = det(-[eye(4)*s-Ac, -Bc ; C1,0]);
+minusD = det([-eye(4)*s-Ac]);
+
+findK = minusD*D + rho*minusN*N;
+koeff = sym2poly(findK);
+theRoots = roots(koeff);
+theStableRoots = theRoots( real(theRoots) < -0.0001 );
+
+
+K = place(Ac,Bc,theStableRoots')
