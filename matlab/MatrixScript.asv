@@ -118,29 +118,16 @@ Cacc = [1 0 0 0];
 Cacc_ = [0 0 1 0];
 V = [0 1 0 0;0 0 1 0;0 0 0 1];
 invT = [Cacc;V];
-T = inv(invT); 
-
+ 
 Cy = Cacc_(1);
-Cx = Cacc_(2:4);
+Cx = Cacc_(3);
 
-By = B(1);
-Bx = B(2:4);
-
-Ayy = A(1,1);
-Axx = A(2:4,2:4);
-Axy = A(2:4,1);
-Ayx = A(1,2:4);
-
-L = (place(Axx',[Ayx;Cx]',stableRoots(2:4)'*3))';
-
-Lacc = L(:,1);
-Lacc_ = L(:,2);
-
+Ayy = A(1,1)
+Axx = A(2:4,2:4)
 
 M1 = Axx - Lacc*Ayx - Lacc_*Cx;
 M2 = Bx - Lacc*By;
 M3 = Axy - Lacc*Ayy - Lacc_*Cy;
 M4 = Lacc_;
 M5 = Lacc;
-M6 = T(1,:);
-M7 = T(2:4,:);
+M6 = T;
